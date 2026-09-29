@@ -1,2 +1,15 @@
+# The configuration of stategraph/stategraph#1747.  [b] depends on [a], so the
+# change runs in two layers.  [autoapply] makes the merge apply [a], and the
+# layer after that apply is a plan of [b] at the merge commit.
+dirs:
+  a:
+    when_modified:
+      autoplan: true
+      autoapply: true
+  b:
+    when_modified:
+      depends_on: 'dir:a'
+      autoplan: true
+      autoapply: true
 engine:
   name: tofu
